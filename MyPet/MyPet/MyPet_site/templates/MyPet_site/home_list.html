@@ -1,0 +1,23 @@
+{% extends "MyPet_site/base.html" %}
+
+{% block contet %}
+
+    <h2>인기 영상</h2>
+    <div class="row">
+    {% for text in petTexts %}
+        <div class="col-sm-6 col-md-4">
+            <a href="{% url 'pet_list_info' pk=text.pk %}">
+                <figure class="figure"></figure>
+                    <img src="../../media/{{ text.img_url}}" class="img-thumbnail" alt="../../media/{{ text.img_url }}">
+                    <figcaption class="figude-caption">
+                        <h3>{{ text.title }}</h3>
+                        <!-- <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
+                    </figcaption>
+                </figure>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+
+{% endblock %}

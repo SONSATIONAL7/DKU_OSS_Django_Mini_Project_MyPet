@@ -1,0 +1,76 @@
+{% extends "MyPet_site/base.html" %}
+
+{% block contet %}
+
+    <style>
+        div {
+            float:left
+        }
+        .left {
+            width:30%;
+        }
+        .left ul li {
+            margin:10px;
+            padding:10px;
+            border:1px solid gray;
+            list-style:none;
+        }
+        .right {
+            width:70%;
+        }
+    </style>
+
+    <div class="left">
+        <ul>
+            <li>고양이</li>
+            <li>강아지</li>
+            <li>새</li>
+            <li id="pop_pet">인기</li>
+            <li>추천</li> 
+        </ul>
+    </div>
+
+    <div class="right">
+        <div class="row all">
+            {% for text in petTexts %}
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'pet_list_info' pk=text.pk %}">
+                        <figure class="figure">
+                            <img src="../../media/{{ text.img_url}}" class="img-thumbnail" alt="../../media/{{ text.img_url }}">
+                            <figcaption class="figude-caption">
+                                <h3>{{ text.title }}</h3>
+                                <!-- <p>...</p>
+                                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
+                            </figcaption>
+                        </figure>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row pop">
+            {% for text in pop_pet %}
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'pet_list_info' pk=text.pk %}">
+                        <figure class="figure">
+                            <img src="../../media/{{ text.img_url}}" class="img-thumbnail" alt="../../media/{{ text.img_url }}">
+                            <figcaption class="figude-caption">
+                                <h3>{{ text.title }}</h3>
+                                <!-- <p>...</p>
+                                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
+                            </figcaption>
+                        </figure>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        $( "#pop_pet" ).click( function() {
+            $(".row").hide();
+            $(".pop").show();
+        });
+    </script>
+
+{% endblock %}
